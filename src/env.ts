@@ -1,2 +1,2 @@
-export const TXT_DICTIONARY_PATH = './litc-win.txt';
-export const JSON_DICTIONARY_PATH = './dict.json';
+export const TXT_RU_DICTIONARY_PATH = './litc-win.txt';
+export const RU_DICTIONARY = './dict.json';

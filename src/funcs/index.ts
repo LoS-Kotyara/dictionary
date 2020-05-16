@@ -1,5 +1,3 @@
-const _doubleMetaphone = require('double-metaphone');
-
 import {
   removeDuplicates,
   TStoC,
@@ -15,7 +13,10 @@ import {
   normalize,
 } from './for_cyr_metaphone';
 
-export let toTransliteration = (string: string): string => {
+export { jsonReader } from './jsonReader';
+export { testWithRandomData } from './testWithRandomData';
+
+export const toTransliteration = (string: string): string => {
   interface StringMap {
     [key: string]: string;
   }
@@ -78,11 +79,7 @@ export let toTransliteration = (string: string): string => {
   return newString;
 };
 
-export let doubleMetaphone = (string: string): string => {
-  return _doubleMetaphone(string);
-};
-
-export let cyrMetaphone = (string: string): string => {
+export const cyrMetaphone = (string: string): string => {
   return removeDuplicates(
     TStoC(
       GtoK(
@@ -98,4 +95,11 @@ export let cyrMetaphone = (string: string): string => {
       ),
     ),
   );
+};
+
+export const normString = (string: string): string[] => {
+  return string
+    .replace(/[\r?\n+]|[\\n\\n]/g, '')
+    .replace(/['!"#$%&\\'\(\)\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g, '')
+    .split(' ');
 };

@@ -1,4 +1,6 @@
-const prepare = (steps: number, length: number) => {
+import { lev } from "../../types/lev";
+
+const prepare = (steps: number, length: number): lev => {
   const relative = length == 0 ? 0 : steps / (length - 1);
   return {
     steps: steps,
@@ -7,12 +9,20 @@ const prepare = (steps: number, length: number) => {
   };
 };
 
-export const damerauLevenshtein = (str1: string, str2: string) => {
-  let str1_length = str1.length;
-  let str2_length = str2.length;
-  let matrix = [];
+export const damerauLevenshtein = (str1: string, str2: string): lev => {
+  const str1_length = str1.length;
+  const str2_length = str2.length;
+  const matrix = [];
 
   const limit = (str2_length > str1_length ? str2_length : str1_length) + 1;
+
+  if (Math.abs(str1_length - str2_length) > limit) {
+    return prepare(limit, limit);
+  } else if (str1_length === 0) {
+    return prepare(str2_length, limit);
+  } else if (str2_length === 0) {
+    return prepare(str1_length, limit);
+  }
 
   for (let i = 0; i < limit; i++) {
     matrix[i] = [i];
@@ -22,21 +32,11 @@ export const damerauLevenshtein = (str1: string, str2: string) => {
     matrix[0][i] = i;
   }
 
-  if (Math.abs((str1_length = str2_length)) > (limit || 100)) {
-    return prepare(limit || 100, limit);
-  }
-
-  if (str1_length == 0) return prepare(str2_length, limit);
-  if (str2_length == 0) return prepare(str1_length, limit);
-
   // Вычисление матрицы
   for (let i = 1; i <= str1_length; ++i) {
     let str1_i = str1[i - 1];
 
     for (let j = 1; j <= str2_length; ++j) {
-      // Отличие в 4
-      if (i == j && matrix[i][j] > 4) return prepare(str1_length, limit);
-
       let str2_j = str2[j - 1];
       let cost = str1_i == str2_j ? 0 : 1;
 
@@ -50,11 +50,11 @@ export const damerauLevenshtein = (str1: string, str2: string) => {
         j > 1 &&
         str1_i === str2[j - 2] &&
         str1[i - 2] === str2_j &&
-        (temp = matrix[i - 2][j - 2] + cost) < min
+        (temp = matrix[i - 2][j - 2] + 1) < min
           ? temp
           : min; // Перестановка.
     }
   }
-
+  // console.table(matrix);
   return prepare(matrix[str1_length][str2_length], limit);
 };
