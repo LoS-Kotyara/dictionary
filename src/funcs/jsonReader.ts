@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { word } from '../../types/word';
+import { word } from '../types';
 
 export const jsonReader = (
   path: string,

@@ -2,8 +2,8 @@ import { cyrMetaphone, toTransliteration } from '../funcs';
 import { damerauLevenshtein } from '../levenshtein';
 const doubleMetaphone = require('double-metaphone');
 
-import { word } from '../../types/word';
-import { lev } from './../../types/lev';
+import { word } from '../types';
+import { lev } from '../types';
 type similarity = {
   word: string;
   lev: lev;
@@ -11,7 +11,7 @@ type similarity = {
 import { dictionary } from '../index';
 import { workerData } from 'worker_threads';
 import { strict } from 'assert';
-import { similarityData } from '../../types/similarityData';
+import { similarityData } from '../types';
 
 const sortByKey = (_this: similarity, that: similarity): number => {
   if (_this.lev.similarity > that.lev.similarity) return 1;

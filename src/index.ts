@@ -6,8 +6,8 @@ import { testForSimilarityEntireData } from './testWordForSimilarity';
 import { writeFileSync } from 'fs';
 
 import { RU_DICTIONARY } from './env';
-import { word } from '../types/word';
-import { similarityData } from './../types/similarityData';
+import { word } from './types';
+import { similarityData } from './types';
 
 let obj = jsonReader(RU_DICTIONARY);
 export const dictionary: word[] = obj.err ? null : obj.dictionary;

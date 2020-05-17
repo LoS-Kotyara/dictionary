@@ -1,4 +1,4 @@
-import { word } from '../../types/word';
+import { word } from '../types';
 export declare const jsonReader: (path: string) => {
     err: string;
     dictionary: word[];

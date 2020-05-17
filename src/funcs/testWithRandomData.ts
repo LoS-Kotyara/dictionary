@@ -3,7 +3,7 @@ import { normString } from '.';
 
 import axios from 'axios';
 import { performance } from 'perf_hooks';
-import { similarityData } from './../../types/similarityData';
+import { similarityData } from '../types';
 
 export const testWithRandomData = async (numOfIters: number) => {
   return new Promise(async (resolve) => {

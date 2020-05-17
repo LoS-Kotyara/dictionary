@@ -1,4 +1,4 @@
-export declare const testWithRandomData: () => Promise<unknown>;
+export declare const testWithRandomData: (numOfIters: number) => Promise<unknown>;
 /**
 let t1 = performance.now();
 testWithRandomData().then((res: { texts: number[]; timings: number[] }) => {

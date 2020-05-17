@@ -1,5 +1,2 @@
-export declare const damerauLevenshtein: (str1: string, str2: string) => {
-    steps: number;
-    relative: number;
-    similarity: number;
-};
+import { lev } from '../types';
+export declare const damerauLevenshtein: (str1: string, str2: string) => lev;

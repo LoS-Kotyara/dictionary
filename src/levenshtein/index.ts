@@ -1,4 +1,4 @@
-import { lev } from "../../types/lev";
+import { lev } from '../types';
 
 const prepare = (steps: number, length: number): lev => {
   const relative = length == 0 ? 0 : steps / (length - 1);

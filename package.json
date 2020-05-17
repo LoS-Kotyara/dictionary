@@ -1,7 +1,7 @@
 {
   "name": "@los_kotyara/wordprocessing",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/src/index.js",
   "license": "MIT",
   "dependencies": {
     "@types/node": "^14.0.1",
@@ -16,12 +16,15 @@
   },
   "homepage": "https://github.com/LoS-Kotyara/dictionary#readme",
   "scripts": {
-    "start": "tsc && node ./dist/src/index"
+    "start": "tsc && node ./dist/index"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "double-metaphone": "^1.0.5",
     "eslint": "^7.0.0"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
