@@ -19,6 +19,15 @@ const sortByKey = (_this: similarity, that: similarity): number => {
   return 0;
 };
 
+let findInObject = (word: string) => {
+  for (let el of dictionary) {
+    if (el.word == word) {
+      return true;
+    }
+  }
+  return false;
+};
+
 export const testForSimilarity = (Word: string): string[] => {
   const word = Word.toLowerCase();
   const translit = toTransliteration(word);
@@ -33,8 +42,10 @@ export const testForSimilarity = (Word: string): string[] => {
   let metaphones: similarity[] = [];
 
   dictionary.forEach((word: word) => {
-    if (Math.abs(word.word.length - _word.word.length) >= 1) return;
+    if (Math.abs(word.word.length - _word.word.length) > 1) return;
+
     const metaphone = damerauLevenshtein(_word.metaphone, word.metaphone);
+
     const cyrMetaphone = damerauLevenshtein(
       _word.cyrMetaphone,
       word.cyrMetaphone,
@@ -55,6 +66,7 @@ export const testForSimilarity = (Word: string): string[] => {
   });
 
   return metaphones
+    .filter((item) => item.word !== word)
     .sort(sortByKey)
     .slice(0, 5)
     .map((word) => word.word);
@@ -62,8 +74,16 @@ export const testForSimilarity = (Word: string): string[] => {
 
 export const testForSimilarityEntireData = (data: string[]): similarityData => {
   return data.map((word) => {
+    if (findInObject(word.toLowerCase()))
+      return {
+        word: word,
+        correct: true,
+        suggestions: [],
+      };
+
     return {
       word: word,
+      correct: false,
       suggestions: testForSimilarity(word),
     };
   });
